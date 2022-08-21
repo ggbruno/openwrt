@@ -8,12 +8,14 @@
 
 include $(TOPDIR)/rules.mk
 
-LZMA_TEXT_START	:= 0x80500000
+LZMA_TEXT_START	:= 0x80a00000
 LOADADDR	:= 0x80000000
 LOADER		:= loader.bin
 LOADER_NAME	:= $(basename $(notdir $(LOADER)))
 LOADER_DATA 	:=
 TARGET_DIR	:=
+FLASH_OFFS	:=
+FLASH_MAX	:=
 BOARD		:=
 
 ifeq ($(TARGET_DIR),)
@@ -37,10 +39,10 @@ $(PKG_BUILD_DIR)/.prepared:
 loader-compile: $(PKG_BUILD_DIR)/.prepared
 	$(MAKE) -C $(PKG_BUILD_DIR) CROSS_COMPILE="$(TARGET_CROSS)" \
 		LZMA_TEXT_START=$(LZMA_TEXT_START) \
-		LOADADDR=$(LOADADDR) \
 		LOADER_DATA=$(LOADER_DATA) \
+		FLASH_OFFS=$(FLASH_OFFS) \
+		FLASH_MAX=$(FLASH_MAX) \
 		BOARD="$(BOARD)" \
-		SUBTARGET="$(SUBTARGET)" \
 		clean all
 
 loader.gz: $(PKG_BUILD_DIR)/loader.bin

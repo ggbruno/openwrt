@@ -30,6 +30,7 @@ define Host/Compile
 	$(call cc,buffalo-enc buffalo-lib,-Wall)
 	$(call cc,buffalo-tag buffalo-lib,-Wall)
 	$(call cc,buffalo-tftp buffalo-lib,-Wall)
+	$(call cc,cvimg)
 	$(call cc,dgfirmware)
 	$(call cc,dgn3500sum,-Wall)
 	$(call cc,dns313-header,-Wall)
